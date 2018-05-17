@@ -1,7 +1,9 @@
 package com.example.lutsak.rotation;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,17 +19,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button countButton;
     Button setNameButton;
     Button showName;
+    Button goWeb;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Log.d(LOG_TAG, ">> onCreate");
 
         countButton = findViewById(R.id.button1);
         setNameButton = findViewById(R.id.setName);
         showName = findViewById(R.id.showName);
+        goWeb = findViewById(R.id.button_web);
+        goWeb.setOnClickListener(this);
         showName.setOnClickListener(this);
         countButton.setOnClickListener(this);
         setNameButton.setOnClickListener(this);
@@ -102,6 +105,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.showName:
                 Toast.makeText(this, mContact.name, Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.button_web:
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
+                startActivity(Intent.createChooser(intent, "Choose Program"));
         }
     }
 
