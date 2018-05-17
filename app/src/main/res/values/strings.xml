@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Rotation</string>
+    <string name="count">Count</string>
+    <string name="set_name">Set name</string>
+    <string name="show_name">show name</string>
+    <string name="btnWeb">WEB</string>
 </resources>
