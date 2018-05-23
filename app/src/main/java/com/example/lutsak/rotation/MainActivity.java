@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    private int mCount = 0;
-    Contact mContact;
+    private static int mCount = 0;
+    Contact contact;
     Button countButton;
     Button setNameButton;
     Button showName;
@@ -35,9 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         countButton.setOnClickListener(this);
         setNameButton.setOnClickListener(this);
 
-        if (mContact == null) {
-            mContact = new Contact();
-        }
+        contact = new Contact();
 
         Log.d(LOG_TAG, "<< onCreate");
     }
@@ -61,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(LOG_TAG, ">> onRestoreInstanceState");
 
-        mCount = savedInstanceState.getInt("mCount");
-        mContact = (Contact) getLastCustomNonConfigurationInstance();
+        contact = (Contact) getLastCustomNonConfigurationInstance();
 
         Log.d(LOG_TAG, "<< onRestoreInstanceState");
     }
@@ -70,14 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         Log.d(LOG_TAG, "onResume ");
-    }
-
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putInt("mCount", mCount);
-
-        Log.d(LOG_TAG, "onSaveInstanceState");
     }
 
     protected void onStart() {
@@ -99,11 +88,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(LOG_TAG, "Toast count: " + mCount);
                 break;
             case R.id.setName:
-                mContact.name = nameText.getText().toString();
+                contact.name = nameText.getText().toString();
                 Log.d(LOG_TAG, "Contact name setted!");
                 break;
             case R.id.showName:
-                Toast.makeText(this, mContact.name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, contact.name, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_web:
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
@@ -113,10 +102,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public Object onRetainCustomNonConfigurationInstance(){
         Log.d(LOG_TAG, "onRetainCustomNonConfigurationInstance");
-        return mContact;
+        return contact;
     }
 
-    class Contact {
+    private static class Contact {
         String name;
     }
 }
