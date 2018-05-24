@@ -9,38 +9,39 @@ import android.webkit.WebViewClient;
 
 public class BrowserActivity extends AppCompatActivity {
 
-    WebView webView;
+    private static WebView mWebView;
 
     @Override
     public void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.layout_browser);
 
-        webView = findViewById(R.id.webView);
+        mWebView = findViewById(R.id.webView);
         Uri data = getIntent().getData();
         if (saveInstanceState == null) {
-            webView.loadUrl(data.toString());
+            mWebView.loadUrl(data.toString());
         }
-        webView.setWebViewClient(new WebClient());
+        mWebView.setWebViewClient(new WebClient());
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        webView.saveState(outState);
+        mWebView.saveState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        webView.restoreState(savedInstanceState);
+        mWebView.restoreState(savedInstanceState);
     }
 
-    public class WebClient extends WebViewClient {
+    private static class WebClient extends WebViewClient {
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             super.shouldOverrideUrlLoading(view, url);
-            webView.loadUrl(url);
+            mWebView.loadUrl(url);
             return true;
         }
         @Override

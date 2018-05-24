@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private static int mCount = 0;
-    Contact contact;
+    private Contact contact;
     Button countButton;
     Button setNameButton;
     Button showName;
