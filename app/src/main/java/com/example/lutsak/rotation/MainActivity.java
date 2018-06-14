@@ -16,24 +16,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static int mCount = 0;
     private Contact contact;
-    Button countButton;
-    Button setNameButton;
-    Button showName;
-    Button goWeb;
+    private Button mCountButton;
+    private Button mSetNameButton;
+    private Button mShowNameButton;
+    private Button mGoWebButton;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(LOG_TAG, ">> onCreate");
 
-        countButton = findViewById(R.id.button1);
-        setNameButton = findViewById(R.id.setName);
-        showName = findViewById(R.id.showName);
-        goWeb = findViewById(R.id.button_web);
-        goWeb.setOnClickListener(this);
-        showName.setOnClickListener(this);
-        countButton.setOnClickListener(this);
-        setNameButton.setOnClickListener(this);
+        mCountButton = findViewById(R.id.button1);
+        mSetNameButton = findViewById(R.id.setName);
+        mShowNameButton = findViewById(R.id.showName);
+        mGoWebButton = findViewById(R.id.button_web);
+        mGoWebButton.setOnClickListener(this);
+        mShowNameButton.setOnClickListener(this);
+        mCountButton.setOnClickListener(this);
+        mSetNameButton.setOnClickListener(this);
 
         contact = new Contact();
 

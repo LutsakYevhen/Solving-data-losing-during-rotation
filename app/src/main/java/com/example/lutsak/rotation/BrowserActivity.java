@@ -1,6 +1,7 @@
 package com.example.lutsak.rotation;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
@@ -9,43 +10,28 @@ import android.webkit.WebViewClient;
 
 public class BrowserActivity extends AppCompatActivity {
 
-    private static WebView mWebView;
+    private WebTask mWebTask;
 
     @Override
     public void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.layout_browser);
 
-        mWebView = findViewById(R.id.webView);
-        Uri data = getIntent().getData();
-        if (saveInstanceState == null) {
-            mWebView.loadUrl(data.toString());
-        }
-        mWebView.setWebViewClient(new WebClient());
+        mWebTask = new WebTask();
+        mWebTask.execute(getIntent().getData());
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mWebView.saveState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        mWebView.restoreState(savedInstanceState);
-    }
-
-    private static class WebClient extends WebViewClient {
+    private class WebTask extends AsyncTask<Uri, Void, String>{
+        private WebView mWebView = findViewById(R.id.webView);
 
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            super.shouldOverrideUrlLoading(view, url);
-            mWebView.loadUrl(url);
-            return true;
+        protected String doInBackground(Uri... uri) {
+            return uri[0].toString();
         }
+
         @Override
-        public void onPageFinished(WebView view, String url) {
+        protected void onPostExecute(String string) {
+            mWebView.loadUrl(string);
         }
     }
 }
