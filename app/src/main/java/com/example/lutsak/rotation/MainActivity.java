@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private static int mCount = 0;
-    private Contact contact;
+    private Contact mContact;
     private Button mCountButton;
     private Button mSetNameButton;
     private Button mShowNameButton;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mCountButton.setOnClickListener(this);
         mSetNameButton.setOnClickListener(this);
 
-        contact = new Contact();
+        mContact = new Contact();
 
         Log.d(LOG_TAG, "<< onCreate");
     }
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(LOG_TAG, ">> onRestoreInstanceState");
 
-        contact = (Contact) getLastCustomNonConfigurationInstance();
+        mContact = (Contact) getLastCustomNonConfigurationInstance();
 
         Log.d(LOG_TAG, "<< onRestoreInstanceState");
     }
@@ -88,11 +88,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(LOG_TAG, "Toast count: " + mCount);
                 break;
             case R.id.setName:
-                contact.name = nameText.getText().toString();
+                mContact.name = nameText.getText().toString();
                 Log.d(LOG_TAG, "Contact name setted!");
                 break;
             case R.id.showName:
-                Toast.makeText(this, contact.name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, mContact.name, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.button_web:
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public Object onRetainCustomNonConfigurationInstance(){
         Log.d(LOG_TAG, "onRetainCustomNonConfigurationInstance");
-        return contact;
+        return mContact;
     }
 
     private static class Contact {

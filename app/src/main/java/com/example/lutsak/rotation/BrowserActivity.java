@@ -21,7 +21,7 @@ public class BrowserActivity extends AppCompatActivity {
     }
 
     private class WebTask extends AsyncTask<Uri, Void, String>{
-        private WebView webView = findViewById(R.id.webView);
+        private WebView mWebView = findViewById(R.id.webView);
 
         @Override
         protected String doInBackground(Uri... uri) {
@@ -30,7 +30,7 @@ public class BrowserActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String string) {
-            webView.loadUrl(string);
+            mWebView.loadUrl(string);
         }
     }
 }
